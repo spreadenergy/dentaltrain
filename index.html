@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Dental Train — The University for the Entire Dental Office</title>
+  <meta name="description" content="Dental Train is the role-based training platform for dental offices. Standardizing how 178,000 U.S. practices train their teams.">
+
+  <!-- TODO (founder): generate a 1200x630 og-image.png and place in /assets/ -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://dentaltrain.app">
+  <meta property="og:title" content="Dental Train — The University for the Entire Dental Office">
+  <meta property="og:description" content="Standardizing how 178,000 U.S. dental practices train their teams. Every role. Every system. Every track.">
+  <meta property="og:image" content="https://dentaltrain.app/assets/og-image.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Dental Train — The University for the Entire Dental Office">
+  <meta name="twitter:description" content="Standardizing how 178,000 U.S. dental practices train their teams.">
+  <meta name="twitter:image" content="https://dentaltrain.app/assets/og-image.png">
+
+  <link rel="icon" type="image/png" href="./assets/logo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: '#0F2D5C',
+            'navy-deep': '#081D3F',
+            teal: '#00B5B8',
+            'teal-light': '#7DD6D8',
+            gold: '#D4A93A',
+            'red-alert': '#C8412B',
+            'gray-text': '#4A5568',
+            'gray-light': '#E2E8F0',
+            'gray-bg': '#F7F9FC',
+          },
+          fontFamily: {
+            serif: ['Fraunces', 'Georgia', 'serif'],
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+          maxWidth: {
+            container: '1120px',
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      color: #0F2D5C;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    .font-serif {
+      font-family: 'Fraunces', Georgia, serif;
+      font-optical-sizing: auto;
+    }
+
+    .eyebrow {
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      line-height: 1;
+    }
+
+    /* Visual motif: teal 4px left border on every content card */
+    .card {
+      border-left: 4px solid #00B5B8;
+      background: #FFFFFF;
+      border-radius: 12px;
+      padding: 32px;
+      transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
+      box-shadow: 0 1px 2px rgba(15, 45, 92, 0.04);
+    }
+    .card:hover {
+      border-left-color: #0F2D5C;
+      box-shadow: 0 8px 24px rgba(15, 45, 92, 0.08);
+    }
+    .card-navy {
+      background: #0F2D5C;
+      color: #FFFFFF;
+      border-left-color: #00B5B8;
+    }
+    .card-navy:hover {
+      border-left-color: #7DD6D8;
+    }
+
+    /* Scroll fade-in */
+    .reveal {
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 600ms cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: opacity, transform;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      html { scroll-behavior: auto; }
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 15px;
+      line-height: 1;
+      transition: transform 150ms ease, background-color 150ms ease, box-shadow 150ms ease, color 150ms ease;
+      text-decoration: none;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: #00B5B8;
+      color: #081D3F;
+    }
+    .btn-primary:hover {
+      background: #009FA1;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(0, 181, 184, 0.35);
+    }
+    .btn-secondary {
+      background: transparent;
+      border: 1.5px solid #00B5B8;
+      color: #00B5B8;
+    }
+    .btn-secondary:hover {
+      background: rgba(0, 181, 184, 0.10);
+      transform: translateY(-1px);
+    }
+    .btn-secondary-onlight {
+      color: #0F2D5C;
+    }
+    .btn:focus-visible {
+      outline: 2px solid #7DD6D8;
+      outline-offset: 3px;
+    }
+
+    /* Lite YouTube embed — loads only on click */
+    .lite-video {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      background: #081D3F;
+      border: 1px solid #E2E8F0;
+      box-shadow: 0 8px 28px rgba(15, 45, 92, 0.12);
+      display: block;
+      padding: 0;
+      transition: transform 200ms ease, box-shadow 200ms ease;
+    }
+    .lite-video:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(15, 45, 92, 0.18);
+    }
+    .lite-video img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .lite-video::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(8, 29, 63, 0) 50%, rgba(8, 29, 63, 0.55) 100%);
+      pointer-events: none;
+    }
+    .lite-video-play {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 76px;
+      height: 76px;
+      border-radius: 999px;
+      background: #00B5B8;
+      color: #081D3F;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 30px rgba(0, 181, 184, 0.45);
+      transition: transform 180ms ease, background-color 180ms ease;
+      z-index: 1;
+    }
+    .lite-video:hover .lite-video-play,
+    .lite-video:focus-visible .lite-video-play {
+      transform: translate(-50%, -50%) scale(1.06);
+      background: #7DD6D8;
+    }
+    .lite-video-meta {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 16px 20px;
+      color: #FFFFFF;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .lite-video-runtime {
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: #7DD6D8;
+    }
+    .lite-video-title {
+      font-size: 14px;
+      font-weight: 500;
+      color: #FFFFFF;
+      opacity: 0.95;
+    }
+    .lite-video iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    .lite-video:focus-visible {
+      outline: 2px solid #7DD6D8;
+      outline-offset: 3px;
+    }
+
+    /* Journey "sign" cards (Get on Board / Choose Your Track / etc.) */
+    .sign-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 18px;
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(15, 45, 92, 0.05);
+      position: relative;
+      overflow: hidden;
+      transition: transform 200ms ease, box-shadow 200ms ease;
+    }
+    .sign-card::before {
+      content: "";
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 6px;
+      background: linear-gradient(180deg, #00B5B8 0%, #0F2D5C 100%);
+    }
+    .sign-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(15, 45, 92, 0.10);
+    }
+    .sign-icon {
+      flex-shrink: 0;
+      width: 38px;
+      height: 38px;
+      border-radius: 999px;
+      background: #0F2D5C;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .sign-title {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #0F2D5C;
+      line-height: 1.1;
+    }
+    .sign-sub {
+      font-size: 12px;
+      color: #4A5568;
+      margin-top: 2px;
+    }
+
+    /* Pills */
+    .pill {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 14px 18px;
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-left: 4px solid #00B5B8;
+      border-radius: 10px;
+    }
+    .pill-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #0F2D5C;
+    }
+    .pill-desc {
+      font-size: 13px;
+      color: #4A5568;
+      margin-top: 2px;
+    }
+
+    /* Stat accent utilities */
+    .accent-red { color: #C8412B; }
+    .accent-gold { color: #D4A93A; }
+    .accent-teal { color: #00B5B8; }
+    .accent-navy { color: #0F2D5C; }
+
+    /* Mobile horizontal scroll for infographic */
+    .infographic-wrap {
+      background: #FFFFFF;
+      border-radius: 12px;
+      box-shadow: 0 6px 24px rgba(15, 45, 92, 0.08);
+      border: 1px solid #E2E8F0;
+      overflow: hidden;
+    }
+    @media (max-width: 767px) {
+      .infographic-wrap { overflow-x: auto; }
+      .infographic-wrap img {
+        min-width: 640px;
+      }
+    }
+
+    /* Full viewport dark sections (hero / footer) */
+    .dark-section {
+      background: #081D3F;
+      color: #FFFFFF;
+    }
+    /* Logo: original PNG has navy text that disappears on dark navy.
+       In dark sections we render it monochrome white. */
+    .logo-on-dark {
+      filter: brightness(0) invert(1);
+    }
+
+    /* Responsive headline sizes */
+    .hero-headline {
+      font-size: clamp(40px, 6.2vw, 72px);
+      font-weight: 600;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+    }
+    .section-headline {
+      font-size: clamp(30px, 4.2vw, 48px);
+      font-weight: 600;
+      line-height: 1.15;
+      letter-spacing: -0.015em;
+    }
+    .stat-number {
+      font-size: clamp(40px, 5.2vw, 64px);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      font-family: 'Fraunces', Georgia, serif;
+    }
+  </style>
+</head>
+<body class="bg-white">
+
+<!-- ============================================================
+     HERO  (dark navy, full viewport)
+     ============================================================ -->
+<header class="dark-section">
+  <div class="max-w-container mx-auto px-6 md:px-12 lg:px-16 min-h-screen flex flex-col">
+    <!-- Logo -->
+    <div class="pt-8 md:pt-10">
+      <img src="./assets/logo.png" alt="Dental Train — The Dental Office University" class="h-12 md:h-16 w-auto logo-on-dark" />
+    </div>
+
+    <!-- Hero content -->
+    <div class="flex-1 flex items-center py-16 md:py-20">
+      <div class="max-w-4xl">
+        <p class="eyebrow text-teal mb-6">The University for the Entire Dental Office</p>
+        <h1 class="hero-headline font-serif text-white mb-6">
+          Standardizing how 178,000 U.S. dental practices train their teams.
+        </h1>
+        <p class="text-lg md:text-xl text-teal-light italic mb-10 font-serif">
+          Every role. Every system. Every track.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <!-- FOUNDER: update the mailto address below to the email you actually monitor -->
+          <a href="mailto:invest@dentaltrain.app?subject=Dental%20Train%20%E2%80%94%20Deck%20Request" role="button" class="btn btn-primary w-full sm:w-auto">
+            Request the Deck
+          </a>
+          <!-- FOUNDER: paste your Calendly / SavvyCal / Google Calendar URL between the quotes below -->
+          <a href="#" role="button" class="btn btn-secondary w-full sm:w-auto" data-calendar-link>
+            Book a Call
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Brand pillar band -->
+    <div class="pb-10 md:pb-14 border-t border-white/10 pt-8 md:pt-10">
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-y-6 gap-x-4">
+        <div class="flex flex-col items-start sm:items-center text-left sm:text-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#00B5B8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="mb-2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <p class="text-[11px] font-bold tracking-[0.16em] text-white">EVERY ROLE.</p>
+        </div>
+        <div class="flex flex-col items-start sm:items-center text-left sm:text-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#00B5B8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="mb-2"><path d="M9 2h6a2 2 0 0 1 2 2v0H7v0a2 2 0 0 1 2-2z"/><rect x="5" y="4" width="14" height="18" rx="2"/><path d="m9 12 2 2 4-4"/><path d="M9 17h6"/></svg>
+          <p class="text-[11px] font-bold tracking-[0.16em] text-white">EVERY SYSTEM.</p>
+        </div>
+        <div class="flex flex-col items-start sm:items-center text-left sm:text-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#00B5B8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="mb-2"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 18v3"/><polygon points="10,9 15,11 10,13" fill="#00B5B8"/></svg>
+          <p class="text-[11px] font-bold tracking-[0.16em] text-white">EXPERT TRAINING.</p>
+        </div>
+        <div class="flex flex-col items-start sm:items-center text-left sm:text-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#00B5B8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="mb-2"><path d="M3 20h18"/><rect x="5" y="14" width="3" height="6"/><rect x="10.5" y="10" width="3" height="10"/><rect x="16" y="6" width="3" height="14"/><path d="m17.5 6 1.5-3 1.5 3"/></svg>
+          <p class="text-[11px] font-bold tracking-[0.16em] text-white">BETTER OFFICES.</p>
+        </div>
+        <div class="flex flex-col items-start sm:items-center text-left sm:text-center col-span-2 sm:col-span-1">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#00B5B8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="mb-2"><path d="M12 2c-3 0-5 2-5 5v4c0 1.5-.5 3-1.5 4-1 .8-1.5 2-1.5 3.2C4 20 5.5 22 8 22h8c2.5 0 4-2 4-3.8 0-1.2-.5-2.4-1.5-3.2-1-1-1.5-2.5-1.5-4V7c0-3-2-5-5-5z"/><path d="M9 13a3 3 0 0 1 3-1 3 3 0 0 1 3 1c0 2-3 3-3 3s-3-1-3-3z" fill="#00B5B8"/></svg>
+          <p class="text-[11px] font-bold tracking-[0.16em] text-white">BETTER CARE.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ============================================================
+     2. THE PROBLEM  (white)
+     ============================================================ -->
+<section id="problem" class="bg-white py-20 md:py-24">
+  <div class="max-w-container mx-auto px-6 md:px-12 lg:px-16 reveal">
+    <p class="eyebrow text-teal mb-4">The Problem</p>
+    <h2 class="section-headline font-serif text-navy max-w-3xl mb-6">
+      Dental training today is structurally broken — and it's expensive.
+    </h2>
+    <p class="text-gray-text text-base md:text-lg max-w-3xl leading-relaxed mb-12">
+      Most dental practices rely on scattered documents, verbal instructions, or having new hires shadow whoever happens to be available. The result is the single most expensive problem in the industry that nobody has productized.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- Card 1 -->
+      <div class="card">
+        <div class="stat-number accent-red mb-3">50%</div>
+        <p class="text-navy font-semibold leading-snug mb-3">of dental assistants are considering leaving their current role</p>
+        <p class="text-gray-text text-sm leading-relaxed">Lack of training and support consistently ranks as a top driver of exit — not pay alone.</p>
+      </div>
+      <!-- Card 2 -->
+      <div class="card">
+        <div class="stat-number accent-red mb-3">$110K</div>
+        <p class="text-navy font-semibold leading-snug mb-3">potential annual revenue lost from one vacant dental assistant seat</p>
+        <p class="text-gray-text text-sm leading-relaxed">Plus $30K–$60K in added labor costs absorbed by remaining staff. Each departure costs $15K–$25K to replace.</p>
+      </div>
+      <!-- Card 3 -->
+      <div class="card">
+        <div class="stat-number accent-red mb-3">90%</div>
+        <p class="text-navy font-semibold leading-snug mb-3">of practices find it "extremely" or "moderately" hard to hire qualified staff</p>
+        <p class="text-gray-text text-sm leading-relaxed">"It's a running joke in dentistry that there is no onboarding for new team members."</p>
+      </div>
+    </div>
+
+    <p class="italic text-gray-text text-base md:text-lg mt-10 max-w-3xl">
+      Every office is solving the same training problem in isolation. Dental Train solves it once, at scale.
+    </p>
+  </div>
+</section>
+
+<!-- ============================================================
+     3. THE SOLUTION  (gray-bg)
+     ============================================================ -->
+<section id="solution" class="bg-gray-bg py-20 md:py-24">
+  <div class="max-w-container mx-auto px-6 md:px-12 lg:px-16 reveal">
+    <p class="eyebrow text-teal mb-4">The Solution</p>
+    <h2 class="section-headline font-serif text-navy max-w-3xl mb-6">
+      The railway system for dental office education.
+    </h2>
+    <p class="text-gray-text text-base md:text-lg max-w-3xl leading-relaxed mb-10">
+      Dental Train turns training into a journey. Every role in the dental office gets its own Track. Each track is made of Stops (lessons), leading to Stations (competency checkpoints), earning Certifications that prove mastery. As staff grow, they Transfer to new tracks. Managers act as Conductors through a dashboard that shows who's boarded, who's behind, and who's ready to advance.
+    </p>
+
+    <!-- Journey signs (visual sequence) -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-10">
+      <div class="sign-card">
+        <div class="sign-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10v6"/><path d="M2 10 12 5l10 5-10 5L2 10z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+        </div>
+        <div>
+          <p class="sign-title">Get on Board</p>
+          <p class="sign-sub">Start your journey</p>
+        </div>
+      </div>
+      <div class="sign-card">
+        <div class="sign-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
+        <div>
+          <p class="sign-title">Choose Your Track</p>
+          <p class="sign-sub">Training for your role</p>
+        </div>
+      </div>
+      <div class="sign-card">
+        <div class="sign-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div>
+          <p class="sign-title">Stop at Each Station</p>
+          <p class="sign-sub">Learn. Practice. Master.</p>
+        </div>
+      </div>
+      <div class="sign-card">
+        <div class="sign-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.5 13 17 22l-5-3-5 3 1.5-9"/></svg>
+        </div>
+        <div>
+          <p class="sign-title">Earn Certified</p>
+          <p class="sign-sub">Grow your career</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="infographic-wrap mb-10">
+      <img
+        src="./assets/journey-infographic.png"
+        alt="The Dental Train journey: Tracks, Stops, Stations, Transfers, and the Conductor dashboard."
+        class="w-full h-auto block"
+        loading="lazy"
+      />
+    </div>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4 mb-10">
+      <div class="pill"><span class="pill-label">Tracks</span><span class="pill-desc">Role paths</span></div>
+      <div class="pill"><span class="pill-label">Stops</span><span class="pill-desc">Bite-size lessons</span></div>
+      <div class="pill"><span class="pill-label">Stations</span><span class="pill-desc">Mastery checkpoints</span></div>
+      <div class="pill"><span class="pill-label">Certifications</span><span class="pill-desc">Proof of skill</span></div>
+      <div class="pill"><span class="pill-label">Transfers</span><span class="pill-desc">Career growth</span></div>
+      <div class="pill"><span class="pill-label">Conductor</span><span class="pill-desc">Manager dashboard</span></div>
+    </div>
+
+    <p class="text-gray-text text-base md:text-lg max-w-3xl leading-relaxed">
+      Every element maps to a revenue feature. Tracks retain users. Certifications create pull-through demand. The Conductor dashboard is why managers renew.
+    </p>
+  </div>
+</section>
+
+<!-- ============================================================
+     4. THE TRACKS  (white)
+     ============================================================ -->
+<section id="tracks" class="bg-white py-20 md:py-24">
+  <div class="max-w-container mx-auto px-6 md:px-12 lg:px-16 reveal">
+    <p class="eyebrow text-teal mb-4">The Product</p>
+    <h2 class="section-headline font-serif text-navy max-w-3xl mb-12">
+      Seven launch tracks. One complete operating system for the practice.
+    </h2>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <!-- 1. Front Desk -->
+      <div class="card">
+        <div class="text-teal mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72a2 2 0 0 1 1.72 2z"/></svg>
+        </div>
+        <h3 class="text-navy font-semibold text-lg mb-2">Front Desk</h3>
+        <p class="text-gray-text text-sm leading-relaxed">Phone, scheduling, intake, first impressions</p>
+      </div>
+
+      <!-- 2. Insurance -->
+      <div class="card">
+        <div class="text-teal mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M12 18V11"/><path d="M9.5 13.5c0-.83.67-1.5 1.5-1.5h2c.83 0 1.5.67 1.5 1.5S13.83 15 13 15h-2c-.83 0-1.5.67-1.5 1.5S10.17 18 11 18h3"/></svg>
+        </div>
+        <h3 class="text-navy font-semibold text-lg mb-2">Insurance</h3>
+        <p class="text-gray-text text-sm leading-relaxed">Eligibility, claims, patient explanations</p>
+      </div>
+
+      <!-- 3. Dental Assistant -->
+      <div class="card">
+        <div class="text-teal mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2c-3 0-5 2-5 5v4c0 1.5-.5 3-1.5 4-1 .8-1.5 2-1.5 3.2C4 20 5.5 22 8 22h8c2.5 0 4-2 4-3.8 0-1.2-.5-2.4-1.5-3.2-1-1-1.5-2.5-1.5-4V7c0-3-2-5-5-5z"/><path d="M10 14c0 1.5 1 2 2 2s2-.5 2-2"/></svg>
+        </div>
+        <h3 class="text-navy font-semibold text-lg mb-2">Dental Assistant</h3>
+        <p class="text-gray-text text-sm leading-relaxed">Room setup, sterilization, chairside, safety</p>
+      </div>
+
+      <!-- 4. Treatment Coordinator -->
+      <div class="card">
+        <div class="text-teal mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2"/><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/><path d="M3 4h8"/></svg>
+        </div>
+        <h3 class="text-navy font-semibold text-lg mb-2">Treatment Coordinator</h3>
+        <p class="text-gray-text text-sm leading-relaxed">Case presentation, financial options, follow-up</p>
+      </div>
+
+      <!-- 5. Office Manager -->
+      <div class="card">
+        <div class="text-teal mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="3" y1="20" x2="21" y2="20"/></svg>
+        </div>
+        <h3 class="text-navy font-semibold text-lg mb-2">Office Manager</h3>
+        <p class="text-gray-text text-sm leading-relaxed">Operations, KPIs, team leadership, reporting</p>
+      </div>
+
+      <!-- 6. Cleaning & Presentation -->
+      <div class="card">
+        <div class="text-teal mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v4"/><path d="M12 17v4"/><path d="M3 12h4"/><path d="M17 12h4"/><path d="m5.6 5.6 2.8 2.8"/><path d="m15.6 15.6 2.8 2.8"/><path d="m5.6 18.4 2.8-2.8"/><path d="m15.6 8.4 2.8-2.8"/></svg>
+        </div>
+        <h3 class="text-navy font-semibold text-lg mb-2">Cleaning &amp; Presentation</h3>
+        <p class="text-gray-text text-sm leading-relaxed">Lobby, restrooms, end-of-day standards</p>
+      </div>
+
+      <!-- 7. Owner Dentist (PREMIUM TIER — navy bg) -->
+      <div class="card card-navy relative">
+        <div class="absolute top-4 right-4">
+          <span class="text-[10px] font-bold tracking-[0.18em] uppercase text-teal bg-teal/10 border border-teal/40 rounded-full px-2 py-1">Premium Tier</span>
+        </div>
+        <div class="text-teal mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        </div>
+        <h3 class="text-white font-semibold text-lg mb-2">Owner Dentist</h3>
+        <p class="text-teal-light text-sm leading-relaxed">Financials, hiring, marketing, scaling</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     5. THE MARKET  (gray-bg)
+     ============================================================ -->
+<section id="market" class="bg-gray-bg py-20 md:py-24">
+  <div class="max-w-container mx-auto px-6 md:px-12 lg:px-16 reveal">
+    <p class="eyebrow text-teal mb-4">The Market</p>
+    <h2 class="section-headline font-serif text-navy max-w-3xl mb-6">
+      A $1B+ addressable SaaS opportunity inside a $179B industry.
+    </h2>
+    <p class="text-gray-text text-base md:text-lg max-w-3xl leading-relaxed mb-12">
+      The U.S. dental industry generates $179.4 billion in annual revenue across 178,000 active practices. The industry is highly fragmented — no single company holds more than 5% market share — and no incumbent owns the whole-office training category.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+      <!-- TAM -->
+      <div class="card" style="border-left-color: #0F2D5C;">
+        <p class="eyebrow accent-navy mb-3">TAM</p>
+        <div class="stat-number accent-navy mb-3">$3.5B – $5.4B</div>
+        <p class="text-navy font-semibold mb-3">Total U.S. dental training &amp; development spend</p>
+        <p class="text-gray-text text-sm leading-relaxed">Based on the 2–3% of gross production that high-performing practices already budget for team training.</p>
+      </div>
+      <!-- SAM -->
+      <div class="card">
+        <p class="eyebrow text-teal mb-3">SAM</p>
+        <div class="stat-number accent-teal mb-3">$640M – $1.06B</div>
+        <p class="text-navy font-semibold mb-3">Subscription-serviceable practices</p>
+        <p class="text-gray-text text-sm leading-relaxed">178,000 U.S. practices × $300–$500/month realistic per-office pricing.</p>
+      </div>
+      <!-- SOM -->
+      <div class="card" style="border-left-color: #D4A93A;">
+        <p class="eyebrow accent-gold mb-3">SOM (5-Year Target)</p>
+        <div class="stat-number accent-gold mb-3">$17M – $42M ARR</div>
+        <p class="text-navy font-semibold mb-3">Realistic 5-year penetration</p>
+        <p class="text-gray-text text-sm leading-relaxed">2% of practices = $17M ARR. 5% of practices = $42M ARR. Plus DSO enterprise upside.</p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 border-t border-gray-light pt-8">
+      <div>
+        <span class="font-serif text-3xl md:text-4xl font-semibold text-navy">178,000</span>
+        <p class="text-gray-text text-sm mt-1">U.S. dental practices</p>
+      </div>
+      <div>
+        <span class="font-serif text-3xl md:text-4xl font-semibold text-navy">202,304</span>
+        <p class="text-gray-text text-sm mt-1">professionally active dentists</p>
+      </div>
+      <div>
+        <span class="font-serif text-3xl md:text-4xl font-semibold text-navy">~650,000</span>
+        <p class="text-gray-text text-sm mt-1">non-clinical staff to train</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     6. WHY NOW  (white)
+     ============================================================ -->
+<section id="why-now" class="bg-white py-20 md:py-24">
+  <div class="max-w-container mx-auto px-6 md:px-12 lg:px-16 reveal">
+    <p class="eyebrow text-teal mb-4">Why Now</p>
+    <h2 class="section-headline font-serif text-navy max-w-3xl mb-12">
+      The window is open. It won't stay open.
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="card">
+        <div class="stat-number accent-teal mb-3">30–40%</div>
+        <p class="text-navy font-semibold mb-3">dental assistant annual turnover</p>
+        <p class="text-gray-text text-sm leading-relaxed">Practices lose their entire assistant teams every 2–3 years. Training is no longer optional — it's retention.</p>
+      </div>
+      <div class="card">
+        <div class="stat-number accent-teal mb-3">25–30%</div>
+        <p class="text-navy font-semibold mb-3">of U.S. offices are now DSO-owned</p>
+        <p class="text-gray-text text-sm leading-relaxed">Growing 3–5 percentage points per year. DSOs buy training platforms at scale. In major metros, DSOs already represent 40–50% of practices.</p>
+      </div>
+      <div class="card">
+        <div class="stat-number accent-teal mb-3">14.6%</div>
+        <p class="text-navy font-semibold mb-3">CAGR for healthcare e-learning through 2030</p>
+        <p class="text-gray-text text-sm leading-relaxed">Fastest-growing corporate training segment globally. North America holds 54.76% of the market.</p>
+      </div>
+      <div class="card">
+        <div class="stat-number accent-teal mb-3">10x</div>
+        <p class="text-navy font-semibold mb-3">faster content production with AI</p>
+        <p class="text-gray-text text-sm leading-relaxed">Building a 400-lesson training library used to take years. A focused team can now ship the first library in months — the moat is finally buildable.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     7. THE FOUNDER  (gray-bg)
+     ============================================================ -->
+<section id="founder" class="bg-gray-bg py-20 md:py-24">
+  <div class="max-w-container mx-auto px-6 md:px-12 lg:px-16 reveal">
+    <p class="eyebrow text-teal mb-4">The Founder</p>
+    <h2 class="section-headline font-serif text-navy max-w-3xl mb-12">
+      Built by an operator, not an educator.
+    </h2>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+      <!-- Quote card -->
+      <div class="card card-navy p-8 md:p-10">
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00B5B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mb-4" aria-hidden="true"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg>
+        <blockquote class="font-serif text-white text-xl md:text-2xl leading-snug mb-8">
+          "Every lesson, track, and certification is built on live operational experience — not theoretical curriculum design."
+        </blockquote>
+        <p class="eyebrow text-teal mb-1">Dr. Lanier — Founder</p>
+        <p class="text-teal-light text-sm">Practicing dentist. Operator of the Kids2Dentist network.</p>
+      </div>
+
+      <!-- Three advantages -->
+      <div class="space-y-6">
+        <div class="flex gap-5">
+          <div class="flex-shrink-0 w-11 h-11 rounded-lg bg-teal/10 flex items-center justify-center text-teal">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+          </div>
+          <div>
+            <h3 class="font-semibold text-navy text-lg mb-1">Built-in content studio</h3>
+            <p class="text-gray-text text-sm md:text-base leading-relaxed">Real offices, real staff, real workflows as the filming ground. Every lesson is captured from live operations, not imagined in a conference room.</p>
+          </div>
+        </div>
+
+        <div class="flex gap-5">
+          <div class="flex-shrink-0 w-11 h-11 rounded-lg bg-teal/10 flex items-center justify-center text-teal">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h20v14H2z"/><path d="M8 21h8"/><path d="M12 17v4"/><path d="m7 8 3 3 7-7"/></svg>
+          </div>
+          <div>
+            <h3 class="font-semibold text-navy text-lg mb-1">Built-in beta market</h3>
+            <p class="text-gray-text text-sm md:text-base leading-relaxed">Every track is validated inside owned practices before external launch. Turnover reduction, completion rates, and manager engagement are measured in real conditions.</p>
+          </div>
+        </div>
+
+        <div class="flex gap-5">
+          <div class="flex-shrink-0 w-11 h-11 rounded-lg bg-teal/10 flex items-center justify-center text-teal">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15c-4.5 0-7 1.5-7 4v2h14v-2c0-2.5-2.5-4-7-4z"/><circle cx="12" cy="8" r="4"/><path d="m18 2 2 3-2 3"/><path d="m6 2-2 3 2 3"/></svg>
+          </div>
+          <div>
+            <h3 class="font-semibold text-navy text-lg mb-1">Built-in credibility</h3>
+            <p class="text-gray-text text-sm md:text-base leading-relaxed">"Built by a dentist who runs practices" is a categorically stronger market position than "built by an LMS vendor." Owners trust operators.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Founder explainer video (lite-embed: loads YouTube only on click) -->
+    <div class="mt-12 md:mt-16">
+      <p class="eyebrow text-teal mb-3">Hear it in the founder's words</p>
+      <h3 class="font-serif text-navy text-2xl md:text-3xl font-semibold mb-6 max-w-2xl leading-tight">
+        Why the dental industry is overdue for a training platform.
+      </h3>
+      <button
+        type="button"
+        class="lite-video"
+        data-yt-id="tGyYba_sQ0o"
+        aria-label="Play video: Dr. Lanier explains the Dental Train concept"
+      >
+        <img src="./assets/video-poster.jpg" alt="" loading="lazy" />
+        <span class="lite-video-play" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.14v14l11-7-11-7z"/></svg>
+        </span>
+        <span class="lite-video-meta">
+          <span class="lite-video-runtime">Watch</span>
+          <span class="lite-video-title">Dr. Lanier on the Dental Train concept</span>
+        </span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     8. THE ASK  (white)
+     ============================================================ -->
+<section id="ask" class="bg-white py-20 md:py-24">
+  <div class="max-w-container mx-auto px-6 md:px-12 lg:px-16 reveal">
+    <p class="eyebrow text-teal mb-4">The Ask</p>
+    <h2 class="section-headline font-serif text-navy max-w-3xl mb-6">
+      Raising a seed round to become the operating system for dental office training.
+    </h2>
+    <p class="text-gray-text text-base md:text-lg max-w-3xl leading-relaxed mb-12">
+      Capital will fund four priorities, each de-risking the path to Series A.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+      <div class="card">
+        <h3 class="text-navy font-semibold text-lg mb-3">Platform &amp; Conductor Dashboard</h3>
+        <p class="text-gray-text text-sm md:text-base leading-relaxed">Build the core LMS with manager-first dashboards, certifications, and transfer flows.</p>
+      </div>
+      <div class="card">
+        <h3 class="text-navy font-semibold text-lg mb-3">Launch Content Library</h3>
+        <p class="text-gray-text text-sm md:text-base leading-relaxed">Produce 200+ lessons across the first three tracks. Filmed in live dental offices.</p>
+      </div>
+      <div class="card">
+        <h3 class="text-navy font-semibold text-lg mb-3">Go-to-Market</h3>
+        <p class="text-gray-text text-sm md:text-base leading-relaxed">Establish the first 100 paying practices. Build the playbook for Series A.</p>
+      </div>
+      <div class="card">
+        <h3 class="text-navy font-semibold text-lg mb-3">Prove Unit Economics</h3>
+        <p class="text-gray-text text-sm md:text-base leading-relaxed">Validate CAC, retention, and LTV. De-risk the scale phase with real customer data.</p>
+      </div>
+    </div>
+
+    <!-- Key metrics dark band -->
+    <div class="bg-navy-deep rounded-xl p-8 md:p-10">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+        <div>
+          <div class="font-serif text-3xl md:text-4xl font-bold text-teal leading-none mb-2">$40M+</div>
+          <p class="text-teal-light text-sm">projected Year-5 ARR</p>
+        </div>
+        <div>
+          <div class="font-serif text-3xl md:text-4xl font-bold text-teal leading-none mb-2">$12K+</div>
+          <p class="text-teal-light text-sm">target LTV per office</p>
+        </div>
+        <div>
+          <div class="font-serif text-3xl md:text-4xl font-bold text-teal leading-none mb-2">20:1+</div>
+          <p class="text-teal-light text-sm">target LTV:CAC</p>
+        </div>
+        <div>
+          <div class="font-serif text-3xl md:text-4xl font-bold text-teal leading-none mb-2">80%+</div>
+          <p class="text-teal-light text-sm">gross margin</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================================================
+     9. CONTACT / FOOTER  (dark navy, full viewport)
+     ============================================================ -->
+<footer class="dark-section">
+  <div class="max-w-container mx-auto px-6 md:px-12 lg:px-16 min-h-screen flex flex-col">
+    <div class="flex-1 flex items-center justify-center py-20 md:py-24">
+      <div class="max-w-3xl text-center">
+        <p class="eyebrow text-teal mb-6">All Aboard</p>
+        <h2 class="hero-headline font-serif text-white mb-6">
+          Every role. Every system. Every track.
+        </h2>
+        <p class="text-lg md:text-xl text-teal-light mb-10">
+          If the thesis resonates, we'd like to hear from you.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <!-- FOUNDER: update mailto address -->
+          <a href="mailto:invest@dentaltrain.app?subject=Dental%20Train%20%E2%80%94%20Deck%20Request" role="button" class="btn btn-primary w-full sm:w-auto">
+            Request the Deck
+          </a>
+          <!-- FOUNDER: paste your Calendly / SavvyCal / Google Calendar URL -->
+          <a href="#" role="button" class="btn btn-secondary w-full sm:w-auto" data-calendar-link>
+            Book a Call
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer band -->
+    <div class="border-t border-white/10 py-6 flex flex-col sm:flex-row gap-3 justify-between items-start sm:items-center">
+      <p class="text-white/50 text-sm">dentaltrain.app · © 2026 Dental Train</p>
+      <p class="text-white/50 text-sm">Investor inquiries: <a class="hover:text-teal transition-colors" href="mailto:invest@dentaltrain.app">invest@dentaltrain.app</a></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Scroll fade-in via IntersectionObserver
+  (function() {
+    var targets = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      targets.forEach(function(el) { el.classList.add('visible'); });
+      return;
+    }
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    targets.forEach(function(el) { io.observe(el); });
+  })();
+
+  // Lite YouTube embed — load the iframe only when the user clicks play
+  (function() {
+    document.querySelectorAll('.lite-video').forEach(function(node) {
+      node.addEventListener('click', function() {
+        var id = node.getAttribute('data-yt-id');
+        if (!id) return;
+        var iframe = document.createElement('iframe');
+        iframe.setAttribute('src',
+          'https://www.youtube-nocookie.com/embed/' + id +
+          '?autoplay=1&rel=0&modestbranding=1&playsinline=1'
+        );
+        iframe.setAttribute('title', 'Dental Train explainer');
+        iframe.setAttribute('allow', 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; web-share');
+        iframe.setAttribute('allowfullscreen', '');
+        node.replaceChildren(iframe);
+        node.style.cursor = 'default';
+      }, { once: true });
+    });
+  })();
+</script>
+
+</body>
+</html>

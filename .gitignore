@@ -1,0 +1,18 @@
+# macOS
+.DS_Store
+._*
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Local Claude Code config (not part of the deployed site)
+.claude/
+
+# Source-of-truth handoff materials (kept locally, not deployed)
+handoff/
+
+# Logs / runtime junk
+*.log
+node_modules/
